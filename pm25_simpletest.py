@@ -30,7 +30,7 @@ reset_pin = None
 
 # For use with Raspberry Pi/Linux:
 import serial
-uart = serial.Serial("/dev/ttyS0", baudrate=9600, timeout=0.25)
+uart = serial.Serial("/dev/ttyS0", baudrate=9600, timeout=1)
 
 # For use with USB-to-serial cable:
 # import serial
@@ -48,7 +48,7 @@ pm25 = PM25_UART(uart, reset_pin)
 print("Found PM2.5 sensor, reading data...")
 
 while True:
-    time.sleep(1)
+    time.sleep(10)
 
     try:
         aqdata = pm25.read()
