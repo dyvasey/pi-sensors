@@ -36,16 +36,17 @@ while n<10:
     except RuntimeError:
         print("Sensor reading failed")
         continue
-    dt = datetime.now()
+    dt = str(datetime.now())
     data=[dt]
     for field in data_fields:
         value = aqdata[field]
         data.append(value)
-    row = pd.Series([data])
-    dataframe.append(row,ignore_index=True)
+    print(data)
+    row = pd.Series(data,index=columns)
+    dataframe = dataframe.append(row,ignore_index=True)
     n=n+1
 
 day = date.today()
-dataframe.to_csv(str(day)+'.csv')
+dataframe.to_csv(str(day)+'.csv',index=False)
     
 
