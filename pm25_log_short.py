@@ -37,8 +37,11 @@ while n<10:
         print("Sensor reading failed")
         continue
     dt = datetime.now()
-    data = aqdata[data_fields]
-    row = pd.Series([dt,data])
+    data=[dt]
+    for field in data_fields:
+        value = aqdata[field]
+        data.append(value)
+    row = pd.Series([data])
     dataframe.append(row)
     n=n+1
 
