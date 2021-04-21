@@ -10,13 +10,18 @@ Personal Python scripts for running sensors on Raspberry Pi. Currently focused o
 
 This sensor is currently attached to a Raspberry Pi Model 4 B+ with 4 GB of RAM. The sensor is connected via serial cable to breakout board from Adafruit, which is then attached via jumper wires to the GPIO pins on the Raspberry Pi. Wiring details and the second image below can be found at https://learn.adafruit.com/pm25-air-quality-sensor/python-and-circuitpython.
 
-<img src="images/pm25_wiring.jpg" alt="Pi UART" width="400" align="center"/>
+<p align="center">
+
+<img src="images/pm25_wiring.jpg" alt="Pi UART" width="400"/>
+
+</p>
+
+<p align="center">
 
 
+<img src="images/adafruit_products_PM2-5_Raspi_UART_bb.png" alt="Pi UART" width="400"/>
 
-
-
-<img src="images/adafruit_products_PM2-5_Raspi_UART_bb.png" alt="Pi UART" width="400" align="center"/>
+</p>
 
 #### Software ####
 
