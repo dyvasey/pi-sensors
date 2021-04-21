@@ -35,12 +35,16 @@ while day==date.today():
     except RuntimeError:
         print("Sensor reading failed")
         continue
-    dt = datetime.now()
-    data = aqdata[data_fields]
-    row = pd.Series([dt,data])
-    dataframe.append(row)
+    dt = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    data=[dt]
+    for field in data_fields:
+        value = aqdata[field]
+        data.append(value)
+    print(data)
+    row = pd.Series(data,index=columns)
+    dataframe = dataframe.append(row,ignore_index=True)
 
 day = date.today()
-dataframe.to_csv(str(day)+'.csv')
+dataframe.to_csv(str(day)+'.csv',index=False)
     
 
