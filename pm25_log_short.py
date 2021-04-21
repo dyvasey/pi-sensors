@@ -36,7 +36,7 @@ while n<10:
     except RuntimeError:
         print("Sensor reading failed")
         continue
-    dt = str(datetime.now())
+    dt = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     data=[dt]
     for field in data_fields:
         value = aqdata[field]
