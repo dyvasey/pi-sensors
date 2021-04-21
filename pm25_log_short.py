@@ -7,9 +7,6 @@ import serial
 import pandas as pd
 from datetime import datetime
 from datetime import date
-
-# datetime object containing current date and time
-now = datetime.now()
 from adafruit_pm25.uart import PM25_UART
 
 uart = serial.Serial("/dev/ttyS0", baudrate=9600, timeout=1)
@@ -45,8 +42,7 @@ while n<10:
     row = pd.Series(data,index=columns)
     dataframe = dataframe.append(row,ignore_index=True)
     n=n+1
+    dataframe.to_csv(str(day)+'.csv',index=False)
 
-day = date.today()
-dataframe.to_csv(str(day)+'.csv',index=False)
     
 
