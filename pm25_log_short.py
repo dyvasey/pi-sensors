@@ -42,7 +42,7 @@ while n<10:
         value = aqdata[field]
         data.append(value)
     row = pd.Series([data])
-    dataframe.append(row)
+    dataframe.append(row,ignore_index=True)
     n=n+1
 
 day = date.today()
