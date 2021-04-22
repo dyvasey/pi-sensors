@@ -18,30 +18,34 @@ data_fields = ['pm10 standard','pm25 standard','pm100 standard',
                    'particles 50um','particles 100um']
 
 columns = ['datetime'] + data_fields
-dataframe = pd.DataFrame(columns=columns)
 
-day = date.today()
-
-# Continue running until next day
+# Set to run indefinitely after setup above
 while True:
-    # Run every 10 minutes
-    time.sleep(600)
-
-    try:
-        aqdata = pm25.read()
-    except RuntimeError:
-        print("Sensor reading failed")
-        continue
-    dt = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    data=[dt]
-    for field in data_fields:
-        value = aqdata[field]
-        data.append(value)
-    print(data)
-    row = pd.Series(data,index=columns)
-    dataframe = dataframe.append(row,ignore_index=True)
-    path = '/home/pi/Desktop/pm25-data/' + str(day) + '.csv'
-    dataframe.to_csv(path,index=False)
+    # Get current date for next CSV file
+    day = date.today()
+    # Reset dataframe to empty
+    dataframe = pd.DataFrame(columns=columns)
+    
+    # Continue running until next day
+    while day==date.today():
+        # Run every 10 minutes
+        time.sleep(600)
+    
+        try:
+            aqdata = pm25.read()
+        except RuntimeError:
+            print("Sensor reading failed")
+            continue
+        dt = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        data=[dt]
+        for field in data_fields:
+            value = aqdata[field]
+            data.append(value)
+        print(data)
+        row = pd.Series(data,index=columns)
+        dataframe = dataframe.append(row,ignore_index=True)
+        path = '/home/pi/Desktop/pm25-data/' + str(day) + '.csv'
+        dataframe.to_csv(path,index=False)
 
     
 
