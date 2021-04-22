@@ -40,7 +40,8 @@ while True:
     print(data)
     row = pd.Series(data,index=columns)
     dataframe = dataframe.append(row,ignore_index=True)
-    dataframe.to_csv(str(day)+'.csv',index=False)
+    path = '/home/pi/Desktop/pm25-data/' + str(day) + '.csv'
+    dataframe.to_csv(path,index=False)
 
     
 
