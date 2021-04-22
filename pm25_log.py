@@ -23,7 +23,7 @@ dataframe = pd.DataFrame(columns=columns)
 day = date.today()
 
 # Continue running until next day
-while day==date.today():
+while True:
     # Run every 10 minutes
     time.sleep(600)
 
