@@ -1,3 +1,4 @@
 *.csv
 io_credentials.py
 nohup.out
+__pycache__
