@@ -31,12 +31,11 @@ The pm25_simpletest.py module required one significant tweak from the settings d
 
 `uart = serial.Serial("/dev/ttyS0", baudrate=9600, timeout=1)`
 
-The two log scripts are custom scripts to take data at an interval and write the output to a csv file using pandas. Currently, the main script outputs data every 10 minutes and is designed to stop once the date changes.
+The two log scripts are custom scripts to take data at an interval and write the output to a csv file using pandas. Currently, the main script outputs data every 10 minutes and is designed to stop once the date changes. The data is saved on an NFS share to an NAS drive and uploaded to Adafruit IO.
 
 #### Next Steps ####
 
-* Configure scripts to run and collect data automatically, then store it locally on an NAS drive.
-* Get interface for plotting data in real time and publish that to separate repository on GitHub pages.
+* Set up algorithm to calculate AQI according to EPA guidelines.
 
 
 
