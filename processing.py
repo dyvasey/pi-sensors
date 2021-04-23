@@ -15,15 +15,28 @@ def aqi(directory = '/home/pi/Desktop/pm25-data/'):
     day = str(date.today())
     yesterday = str(date.today()-timedelta(days=1))
     
-    data1 = pd.read_csv(directory+yesterday+'.csv')
+
     data2 = pd.read_csv(directory+day+'.csv')
     
-    data = pd.concat([data1,data2])
+    # Check to see if previous data avaiiable
+    try:
+        data1 = pd.read_csv(directory+yesterday+'.csv')
+    except:
+        data = data2
+    else:
+        data = pd.concat([data1,data2])
     
     # Get last row in combined data
     last = len(data.index)
-    # Get every hour over past 12 hours
-    rows = np.arange(last-72,last+1,6)
-    measurements = data.loc[rows,'pm25 standard']
     
-    return(measurements)
+    # Get every hour over past 12 hours
+    try:
+        rows = np.arange(last-72,last+1,6)
+        measurements = data.loc[rows,'pm25 standard']
+        return(measurements)
+    
+    except:
+        print('Insufficient data available for AQI NowCast')
+        print('Measurements Available: ',last)
+        return
+
