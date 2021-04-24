@@ -71,9 +71,9 @@ def aqi_nowcast(directory = '/home/pi/Desktop/pm25-data/'):
     # Truncate pm25 to 1 decimal place
     nowcast_pm25 = round(sum_weighted/sum_factors,1)
     
-    aqi = calc_aqi(nowcast_pm25)
+    aqi,field = calc_aqi(nowcast_pm25)
         
-    return(nowcast_pm25,aqi)
+    return(nowcast_pm25,aqi,field)
 
 def calc_aqi(pm25):
     """
@@ -99,7 +99,6 @@ def calc_aqi(pm25):
     for key in levels:
         if levels[key][2] <= pm25 <= levels[key][3]:
             field = key
-            print(field)
     
     values = levels[field]
     aqi = (
@@ -107,6 +106,6 @@ def calc_aqi(pm25):
         + values[0]
         )
     
-    return(aqi)
+    return(aqi,field)
     
     
