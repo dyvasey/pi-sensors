@@ -25,6 +25,6 @@ while True:
         print("Can't Calculate AQI")
         continue
     
-    # Send the PM 2.5 data to Adafruit IO
+    # Send the AQI to Adafruit IO
     aio.send_data(feed.key, aqi)
     
