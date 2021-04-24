@@ -7,6 +7,7 @@ import serial
 import pandas as pd
 from datetime import datetime
 from datetime import date
+from os import path
 
 from adafruit_pm25.uart import PM25_UART
 from Adafruit_IO import Client, RequestError, Feed
@@ -31,8 +32,14 @@ columns = ['datetime'] + data_fields
 while True:
     # Get current date for next CSV file
     day = date.today()
-    # Reset dataframe to empty
-    dataframe = pd.DataFrame(columns=columns)
+    pth = '/home/pi/Desktop/pm25-data/' + str(day) + '.csv'
+    
+    # Get existing dataframe if it exists
+    if path.exists(pth):
+        dataframe = pd.read_csv(pth)
+    else:
+        # Reset dataframe to empty
+        dataframe = pd.DataFrame(columns=columns)
     
     # Continue running until next day
     while day==date.today():
@@ -59,8 +66,8 @@ while True:
         print(data)
         row = pd.Series(data,index=columns)
         dataframe = dataframe.append(row,ignore_index=True)
-        path = '/home/pi/Desktop/pm25-data/' + str(day) + '.csv'
-        dataframe.to_csv(path,index=False)
+        
+        dataframe.to_csv(pth,index=False)
         
 
     
