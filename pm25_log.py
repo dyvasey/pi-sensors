@@ -54,6 +54,10 @@ while True:
             print("Sensor reading failed")
             continue
         
+        except serial.SerialException:
+            print("Sensor failed to connect")
+            continue
+        
         # Send the PM 2.5 data to Adafruit IO
         aio.send_data(feed.key, aqdata['pm25 standard'])
         
