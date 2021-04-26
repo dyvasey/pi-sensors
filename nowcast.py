@@ -16,8 +16,7 @@ try:
     pm25,aqi,level = processing.aqi_nowcast()  
 
 except:
-    print("Can't Calculate AQI")
-    raise
+    raise Exception("Can't Calculate AQI")
 
 # Send the AQI to Adafruit IO
 aio.send_data(feed.key, aqi)
