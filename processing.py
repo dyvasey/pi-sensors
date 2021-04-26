@@ -112,8 +112,12 @@ def calc_aqi(pm25):
     for key in levels:
         if levels[key][2] <= pm25 <= levels[key][3]:
             field = key
-    
-    values = levels[field]
+    try:
+        values = levels[field]
+    except UnboundLocalError:
+        print('PM 2.5 Input: ',pm25)
+        raise Exception('PM 2.5 value failed to fit into an AQI range')
+        
     aqi = (
         (values[1]-values[0])/(values[3]-values[2])*(pm25-values[2])
         + values[0]
