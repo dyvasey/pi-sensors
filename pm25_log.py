@@ -56,7 +56,7 @@ while n<5:
         n = n+1
         continue
 else:
-    print('Sensor reading failed after 5 attempts')
+    raise Exception('Sensor reading failed after 5 attempts')
 
 # Send the PM 2.5 data to Adafruit IO
 aio.send_data(feed.key, aqdata['pm25 standard'])
