@@ -118,7 +118,8 @@ def calc_aqi(pm25):
         (values[1]-values[0])/(values[3]-values[2])*(pm25-values[2])
         + values[0]
         )
+    aqi_integer = round(aqi,0)
     
-    return(aqi,field)
+    return(aqi_integer,field)
     
     
