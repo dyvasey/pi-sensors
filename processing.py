@@ -4,7 +4,7 @@ Data processing functions for Raspberry Pi sensors
 import pandas as pd
 import numpy as np
 
-from datetime import date,timedelta
+from datetime import date,timedelta,datetime
 
 def aqi_nowcast(directory = '/home/pi/Desktop/pm25-data/'):
     """
@@ -17,24 +17,37 @@ def aqi_nowcast(directory = '/home/pi/Desktop/pm25-data/'):
     yesterday = str(date.today()-timedelta(days=1))
     
 
-    data2 = pd.read_csv(directory+day+'.csv')
+    data2 = pd.read_csv(directory+day+'.csv',parse_dates=[0])
     
     # Check to see if previous data avaiiable
     try:
-        data1 = pd.read_csv(directory+yesterday+'.csv')
+        data1 = pd.read_csv(directory+yesterday+'.csv',parse_dates=[0])
     except:
         data = data2
     else:
         data = pd.concat([data1,data2])
         data.reset_index(inplace=True)
     
+    # Get timestamps to nearest 10 minutes
+    data.index = data['datetime'].dt.round('10min')
+    
+    
     # Get last row in combined data
     last = len(data.index)
     
     # Get every hour over past 12 hours
-    try:
-        rows = np.arange(last-1,last-74,-6)
-        hour_measurements = data.loc[rows,'pm25 standard']
+    now = datetime.now()
+    nearest_10 = now - timedelta(minutes=now.minute % 10,
+                             seconds=now.second,
+                             microseconds=now.microsecond)
+    
+    hrs = []
+    for x in range(13):
+        t = nearest_10 - timedelta(hours=x)
+        hrs.append(t)
+    
+    try:   
+        hour_measurements = data.loc[hrs,'pm25 standard']
     
     except:
         print('Insufficient data available for AQI NowCast')
