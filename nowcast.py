@@ -17,6 +17,7 @@ try:
 
 except:
     print("Can't Calculate AQI")
+    raise
 
 # Send the AQI to Adafruit IO
 aio.send_data(feed.key, aqi)
