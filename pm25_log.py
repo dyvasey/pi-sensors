@@ -38,15 +38,25 @@ else:
     # Start empty dataframe
     dataframe = pd.DataFrame(columns=columns)
 
-try:
-    # Read data from the sensor
-    aqdata = pm25.read()
-
-except RuntimeError:
-    print("Sensor reading failed")
-
-except serial.SerialException:
-    print("Sensor failed to connect")
+# Have sensor attempt the reading 5 times
+n = 0
+while n<5:
+    try:
+        # Read data from the sensor
+        aqdata = pm25.read()
+        break
+    
+    except RuntimeError:
+        print("Sensor reading failed")
+        n = n+1
+        continue
+    
+    except serial.SerialException:
+        print("Sensor failed to connect")
+        n = n+1
+        continue
+else:
+    print('Sensor reading failed after 5 attempts')
 
 # Send the PM 2.5 data to Adafruit IO
 aio.send_data(feed.key, aqdata['pm25 standard'])
