@@ -1,5 +1,5 @@
 *.csv
 *.log
 io_credentials.py
-nohup.out
+logs
 __pycache__
