@@ -31,11 +31,13 @@ The pm25_simpletest.py module required one significant tweak from the settings d
 
 `uart = serial.Serial("/dev/ttyS0", baudrate=9600, timeout=1)`
 
-The two log scripts are custom scripts to take data at an interval and write the output to a csv file using pandas. Currently, the main script outputs data every 10 minutes and is designed to stop once the date changes. The data is saved on an NFS share to an NAS drive and uploaded to Adafruit IO.
+Even this fails every ~5-8 measurements, so I've now increased it to 2 in the main log script.
+
+The main pm25_log.py script takes data at an interval and writes the output to a csv file using pandas. The nowcast.py file uses functions in processing.py to take the last 12 hours of PM 2.5 data to nowcast an air quality index (AQI), following EPA practices (https://usepa.servicenowservices.com/airnow?id=kb_article&sysparm_article=KB0011856). Currently, these two scripts are run every 10 minutes using a shell script and cron. The data is saved on an NFS share to an NAS drive, and the PM 2.5 data and AQI are uploaded to Adafruit IO.
 
 #### Next Steps ####
 
-* Set up algorithm to calculate AQI according to EPA guidelines.
+* Add RGB LED and LCD screen to output current PM 2.5 and AQI and show the color of the current AQI level.
 
 
 
