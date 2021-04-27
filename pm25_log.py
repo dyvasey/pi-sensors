@@ -14,7 +14,7 @@ from Adafruit_IO import Client
 # Separate .py file with Adafruit IO username and key
 import io_credentials
 
-uart = serial.Serial("/dev/ttyS0", baudrate=9600, timeout=1)
+uart = serial.Serial("/dev/ttyS0", baudrate=9600, timeout=2)
 pm25 = PM25_UART(uart)
 
 aio = Client(io_credentials.username, io_credentials.key)
