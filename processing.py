@@ -3,6 +3,10 @@ Data processing functions for Raspberry Pi sensors
 """
 import pandas as pd
 import numpy as np
+import board
+import digitalio
+
+import adafruit_character_lcd.character_lcd as characterlcd
 
 from datetime import date,timedelta,datetime
 
@@ -125,5 +129,26 @@ def calc_aqi(pm25):
     aqi_integer = round(aqi,0)
     
     return(aqi_integer,field)
+
+def disp_aqi(pm25,aqi):
+    """
+    Display PM 2.5 and AQI Nowcast on LCD display
+    """
     
+    lcd_rs = digitalio.DigitalInOut(board.D26)
+    lcd_en = digitalio.DigitalInOut(board.D19)
+    lcd_d7 = digitalio.DigitalInOut(board.D27)
+    lcd_d6 = digitalio.DigitalInOut(board.D22)
+    lcd_d5 = digitalio.DigitalInOut(board.D24)
+    lcd_d4 = digitalio.DigitalInOut(board.D25)
+
+    lcd_columns = 16
+    lcd_rows = 2
+    
+    lcd = characterlcd.Character_LCD_Mono(lcd_rs, lcd_en, lcd_d4, lcd_d5,
+                                          lcd_d6,lcd_d7, lcd_columns,
+                                          lcd_rows)
+    
+    lcd.message = "PM2.5: " +str(pm25) + "\nAQI: " + str(aqi)
+    return
     

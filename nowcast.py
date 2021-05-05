@@ -20,4 +20,7 @@ except:
 
 # Send the AQI to Adafruit IO
 aio.send_data(feed.key, aqi)
+
+# Display data on LCD
+processing.disp_aqi(pm25,aqi)
     
