@@ -16,7 +16,7 @@ try:
     pm25,aqi,level = processing.aqi_nowcast()  
 
 except:
-    processing.disp('Err','Err')
+    processing.disp_aqi('Err','Err')
     raise Exception("Can't Calculate AQI")
     
 
