@@ -153,9 +153,9 @@ def disp_aqi(pm25,aqi):
     # LCD on from 9 AM to 10 PM
     now = datetime.now()
     if 9<=now.hour<22:
-        lcd.backlight = True
-    else:
         lcd.backlight = False
+    else:
+        lcd.backlight = True
     
     
     lcd.message = "PM2.5: " +str(pm25) + "\nAQI: " + str(aqi)
