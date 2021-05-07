@@ -27,4 +27,4 @@ touch = ss.moisture_read()
 temp = ss.get_temp()
 
 aio.send_data(feed1.key, touch)
-aio.send_data(feed2.key, touch)
+aio.send_data(feed2.key, temp)
