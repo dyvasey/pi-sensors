@@ -1,0 +1,2 @@
+# fstab generally located at /etc/fstab. Line below needs to be in the file for automatic nfs mounting.
+192.168.1.99:/volume1/homes/dyvasey/Dropbox/Pi-Data/pm25-data /home/pi/Desktop/pm25-data nfs defaults 0 0

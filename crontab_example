@@ -1,0 +1,7 @@
+# This file contains sample crontab scripts, added using the crontab -e command
+#
+# Running the pm25 scripts every 10 minutes
+0,10,20,30,40,50 * * * * /home/pi/Desktop/pi-sensors/run.sh
+#
+# Running the soil sensor every minute
+* * * * * sudo /home/pi/Desktop/pi-sensors/run_soil.sh
